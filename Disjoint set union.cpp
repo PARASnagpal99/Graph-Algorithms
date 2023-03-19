@@ -1,69 +1,50 @@
-/*  ੴ   Satnam Waheguru */
-#include<bits/stdc++.h>
-using namespace std;
+// DSU template 
+class DisjointSet {
+    vector<int> rank, parent, size;
+public:
+    DisjointSet(int n) {
+        rank.resize(n + 1, 0);
+        parent.resize(n + 1);
+        size.resize(n + 1);
+        for (int i = 0; i <= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
 
-int parent[1000];
-int rank[1000];
+    int findUPar(int node) {
+        if (node == parent[node])
+            return node;
+        return parent[node] = findUPar(parent[node]);
+    }
 
-void makeSet(n){
-	for(int i=1 ; i<=n ; ++i){
-		parent[i] = i ;
-		rank[i] = 0 ;
-	}
-}
+    void unionByRank(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (rank[ulp_u] < rank[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+        }
+        else if (rank[ulp_v] < rank[ulp_u]) {
+            parent[ulp_v] = ulp_u;
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            rank[ulp_u]++;
+        }
+    }
 
-int findPar(int node){
-	if(node == parent(node)){
-		return node ;
-	}
-	
-	return parent[node] = findPar(parent[node]);
-}
-
-
-void union(int u , int v){
-	u = findPar(u);
-	v = findPar(v);
-	
-	if(rank[u] < rank[v]){
-		parent[u] = v ;
-	}else if(rank[v] < rank[u]){
-		parent[v] = u ;
-	}else{
-		parent[v] = u ;
-		rank[u]++;
-	}
-}
-
-
-
-
-
-void solve(){
-	makeSet() ;
-	int m ;
-	cin >> m ;
-	while(m--){
-		int u , v ;
-		union(u,v);
-	}
-	
-	// if 2 and 3 belong to the same component or not 
-	if(findPar(2)!=findPar(3)){
-		cout << "Yes they belong to the different components" << endl ;
-	}else{
-		cout << "No , they are part of same connected component" << endl ;
-	}
-	
-}
-
-int32_t main(){
- 	 ios_base::sync_with_stdio(false); cin.tie(NULL); // fast input output
-      int t ;
-      //cin >> t ;
-      t = 1 ;
-      while(t--){
-      	solve() ;
-      } 
-
-}
+    void unionBySize(int u, int v) {
+        int ulp_u = findUPar(u);
+        int ulp_v = findUPar(v);
+        if (ulp_u == ulp_v) return;
+        if (size[ulp_u] < size[ulp_v]) {
+            parent[ulp_u] = ulp_v;
+            size[ulp_v] += size[ulp_u];
+        }
+        else {
+            parent[ulp_v] = ulp_u;
+            size[ulp_u] += size[ulp_v];
+        }
+    }
+};
