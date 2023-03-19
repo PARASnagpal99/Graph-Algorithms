@@ -1,8 +1,8 @@
 // DSU template 
-class DisjointSet {
+class DSU {
     vector<int> rank, parent, size;
 public:
-    DisjointSet(int n) {
+    DSU(int n) {
         rank.resize(n + 1, 0);
         parent.resize(n + 1);
         size.resize(n + 1);
