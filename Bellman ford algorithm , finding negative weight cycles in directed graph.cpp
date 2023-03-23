@@ -1,25 +1,3 @@
-/*  ੴ   Satnam Waheguru */
-#include<bits/stdc++.h>
-#define REP(it,n) for(int i=it; i<n; i++)
-#define mod 1000000007
-#define int long long
-#define pb push_back
-#define ff first
-#define ss second
-#define ii pair<int,int>
-#define vi vector<int>
-#define vii vector<ii>
-#define lli long long int
-#define ll long long
-#define INF 1000000000
-#define prDouble(x) cout << fixed << setprecision(10) << x  
-#define endl '\n'
-const double PI = 3.141592653589793238460;
-typedef std::complex<double> Complex;
-typedef std::valarray<Complex> CArray;
-
-using namespace std;
-
 struct node{
 	int u , v , wt ;
 	node(int first , int second , int weight){
@@ -81,15 +59,4 @@ void solve(){
 	
 	cout << endl ;
 	
-}
-
-int32_t main(){
- 	 ios_base::sync_with_stdio(false); cin.tie(NULL); // fast input output
-      int t ;
-     // cin >> t ;
-      t = 1 ;
-      while(t--){
-      	solve() ;
-      } 
-
 }
