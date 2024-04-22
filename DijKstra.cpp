@@ -43,7 +43,9 @@ void solve(){
     	while(!pq.empty()){
     		//auto curr_dist = pq.top().first ;
     		auto curr_node = pq.top().second ;
+            int wt = pq.top().first ;
     		pq.pop() ;
+            if(dist[curr_node] < wt) continue ;
     		
     		for(auto &it : graph[curr_node]){
     			auto child_node = it.first ;
